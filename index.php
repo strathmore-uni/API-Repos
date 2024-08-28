@@ -9,5 +9,8 @@
     <h1>Hello</h1>
     <h2>This is my first page</h2>
     <h2>This is my first page</h2>
+    <?php
+    require_once "load.php";
+    print $Obj ->user_age("Sasha", 2004);?>
 </body>
 </html>
