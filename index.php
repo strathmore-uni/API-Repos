@@ -13,6 +13,8 @@
     require "load.php";
     $ObjLayouts -> heading();
     $ObjMenus -> main_menu();
+    $ObjLayouts -> footer();
+    $ObjHeading -> main_banner();
     ?>
 
 
