@@ -1,5 +1,4 @@
 body{
-    background-color: aqua;
     margin: 0;
 }
 *{
@@ -25,7 +24,7 @@ body{
 }
 
 .topnav-right{
-    float:right;
+    float: right;
 }
 
 
@@ -34,4 +33,5 @@ body{
     padding: 20px;
     text-align: center;
     color: azure;
+    bottom: 100%;
 }

@@ -4,6 +4,7 @@ class menus{
         ?>
         <div class="topnav">
             <a href="./">Home</a>
+            <a href="about.php">About Us</a>
             <a href="">Our Project</a>
             <a href="">Our Portfolio</a>
             <a href="">Contact Us</a>
