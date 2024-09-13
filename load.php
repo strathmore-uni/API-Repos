@@ -20,8 +20,27 @@ $ObjMenus = new menus();
 $ObjHeading = new headings();
 $ObjCont = new contents();
 
+require "includes/constants.php";
+require "includes/dbConnection";
+
+$conn = new dbConnection ($DBTYPE, $HOSTNAME, $DBPORT, $db_user, $HOSTPASS, $DBNAME);
+
 
 
 
 
 ?>
+<!-- print date("1");
+if(date("1")== "Friday"){
+    print "Yes";
+}else{
+    print "No";
+}
+
+print "<br>";
+switch (date("1")){
+    case 'Friday': print "Yes";
+    break;
+    case 'Monday': print "No";
+    break;
+} -->
