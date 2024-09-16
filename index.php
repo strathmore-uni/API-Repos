@@ -13,12 +13,11 @@
     require "load.php";
     $ObjLayouts -> heading();
     $ObjMenus -> main_menu();
-    $ObjLayouts -> footer();
     $ObjHeading -> main_banner();
     $ObjCont -> main_content();
-    
     $ObjCont -> side_bar();
-    
+    $ObjLayouts -> footer();
+ 
     ?>
 
 

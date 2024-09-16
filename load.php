@@ -21,9 +21,9 @@ $ObjHeading = new headings();
 $ObjCont = new contents();
 
 require "includes/constants.php";
-require "includes/dbConnection";
+require "includes/dbConnection.php";
 
-$conn = new dbConnection ($DBTYPE, $HOSTNAME, $DBPORT, $db_user, $HOSTPASS, $DBNAME);
+$conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
 
 
 

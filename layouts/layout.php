@@ -22,4 +22,4 @@ class layout{
 </html>
         <?php
     }
-}?>
+}

@@ -10,6 +10,14 @@ class contents{
         </div>
         <?php
     }
+    public function about_content(){
+        ?>
+        <div class="row">
+        <div class="content">
+            <H1>About Content</H1>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus eligendi accusamus nisi tempore, laborum minus beatae doloremque laboriosam dicta voluptatem. Enim cum dolor ea a vero officia, minus facere nobis.</p></div>
+            <?php
+    }
     public function side_bar(){
         ?>
         <div class="side_bar">

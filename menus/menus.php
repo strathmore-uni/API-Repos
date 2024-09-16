@@ -8,6 +8,7 @@ class menus{
             <a href="">Our Project</a>
             <a href="">Our Portfolio</a>
             <a href="">Contact Us</a>
+            <?php $this ->main_right_menu(); ?>
             
         </div>
         <?php
