@@ -1,7 +1,7 @@
 <?php
 //Class Auto Load
 function classAutoLoad($classname){
-$directories = ["content", "layouts", "menus"];
+$directories = ["content", "layouts", "menus", "forms"];
 
 foreach($directories AS $dir){
     $filename = dirname(__FILE__) . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $classname . ".php";
@@ -19,6 +19,8 @@ $ObjLayouts = new layout();
 $ObjMenus = new menus();
 $ObjHeading = new headings();
 $ObjCont = new contents();
+$ObjForm = new user_forms();
+
 
 require "includes/constants.php";
 require "includes/dbConnection.php";
