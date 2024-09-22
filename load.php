@@ -1,7 +1,7 @@
 <?php
 //Class Auto Load
 function classAutoLoad($classname){
-$directories = ["content", "layouts", "menus", "forms"];
+$directories = ["content", "layouts", "menus", "forms","processes"];
 
 foreach($directories AS $dir){
     $filename = dirname(__FILE__) . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $classname . ".php";
@@ -22,12 +22,16 @@ $ObjCont = new contents();
 $ObjForm = new user_forms();
 
 
+
 require "includes/constants.php";
 require "includes/dbConnection.php";
 
 $conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
 
+// Create process instances
 
+$ObjAuth = new auth();
+$ObjAuth->signup($conn);
 
 
 
