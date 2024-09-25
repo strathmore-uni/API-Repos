@@ -1,10 +1,12 @@
 <?php
 class auth{
-    public function signup($conn){
+    public function signup($conn, $ObjGlob){
         if(isset($_POST["signup"])){
+            $errors = array();
             $fullname = $_POST["fullname"];
-            $email_address = $_POST["email_address"];
             $username = $_POST["username"];
+            $email_address = $_POST["email_address"];
+            
 
 // Implement input validation and error handling
 // =============================================
@@ -15,7 +17,7 @@ class auth{
 // verify if the email alredy exists in the database
 
 if(!filter_var($email_address, FILTER_VALIDATE_EMAIL)){
-    die('Wrong email format');
+    $errors['email_format_error']='Wrong email format';
 }
 
 
@@ -28,7 +30,7 @@ if(!filter_var($email_address, FILTER_VALIDATE_EMAIL)){
 // verify that the password length is between 4 and 8 characters
 
 
-
+if(!count($errors)){
             $cols = ['fullname', 'email', 'username'];
             $vals = [$fullname, $email_address, $username];
 
@@ -43,5 +45,9 @@ if(!filter_var($email_address, FILTER_VALIDATE_EMAIL)){
                 die($insert);
             }
         }
+    } else {
+        $ObjGlob->setMsg('msg', 'Error(s)', 'invalid');
+        $ObjGlob->setMsg('errors', $errors, 'invalid');
+    }
     }
 }

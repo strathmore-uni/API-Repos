@@ -13,6 +13,7 @@ foreach($directories AS $dir){
 }
 
 spl_autoload_register('classAutoLoad');
+$ObjGlob = new fncs();
 
 //Create instance of all classes
 $ObjLayouts = new layout();
@@ -31,7 +32,8 @@ $conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
 // Create process instances
 
 $ObjAuth = new auth();
-$ObjAuth->signup($conn);
+$ObjAuth->signup($conn, $ObjGlob);
+
 
 
 
