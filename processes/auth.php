@@ -13,6 +13,12 @@ class auth{
 // verify that the email has got the correct format
 // verify that the email domain is authorized (@strathmore.edu, @gmail.com, @yahoo.com, @mada.co.ke) and not (@yanky.net)
 // verify if the email alredy exists in the database
+
+if(!filter_var($email_address, FILTER_VALIDATE_EMAIL)){
+    die('Wrong email format');
+}
+
+
 // verify if the username alredy exists in the database
 
 // Implement 2FA (email => PHP-Mailer)

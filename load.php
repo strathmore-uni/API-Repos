@@ -1,7 +1,7 @@
 <?php
 //Class Auto Load
 function classAutoLoad($classname){
-$directories = ["content", "layouts", "menus", "forms","processes"];
+$directories = ["content", "layouts", "menus", "forms","processes", "global"];
 
 foreach($directories AS $dir){
     $filename = dirname(__FILE__) . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $classname . ".php";
