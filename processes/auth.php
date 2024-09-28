@@ -74,27 +74,27 @@ class auth{
             // Verify that the password is identical to the repeat passsword
             // verify that the password length is between 4 and 8 characters
             // Generate a random OTP
-            $otp = rand(100000, 999999);
-            // Send email verification with the OTP
-            require_once 'PHPMailer/PHPMailerAutoload.php';
-            $mail = new PHPMailer;
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->Port = 587;
-            $mail->SMTPSecure = 'tls';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'marlynwairimu4@gmail.com';
-            $mail->Password = 'Mals4@Nimo';
-            $mail->setFrom('marlynwairimu4@gmail.com', 'Marlyn');
-            $mail->addAddress($email_address, $fullname);
-            $mail->Subject = 'Email Verification';
-            $mail->Body = 'Your OTP is: ' . $otp;
-            if (!$mail->send()) {
-                $errors['emailVerification_err'] = 'Failed to send email verification';
-            } else {
-                // Store the OTP in the database
-                $conn->query("UPDATE users SET otp = '$otp' WHERE email = '$email_address'");
-            }
+            // $otp = rand(100000, 999999);
+            // // Send email verification with the OTP
+            // require_once 'PHPMailer/PHPMailerAutoload.php';
+            // $mail = new PHPMailer;
+            // $mail->isSMTP();
+            // $mail->Host = 'smtp.gmail.com';
+            // $mail->Port = 587;
+            // $mail->SMTPSecure = 'tls';
+            // $mail->SMTPAuth = true;
+            // $mail->Username = 'marlynwairimu4@gmail.com';
+            // $mail->Password = 'Mals4@Nimo';
+            // $mail->setFrom('marlynwairimu4@gmail.com', 'Marlyn');
+            // $mail->addAddress($email_address, $fullname);
+            // $mail->Subject = 'Email Verification';
+            // $mail->Body = 'Your OTP is: ' . $otp;
+            // if (!$mail->send()) {
+            //     $errors['emailVerification_err'] = 'Failed to send email verification';
+            // } else {
+            //     // Store the OTP in the database
+            //     $conn->query("UPDATE users SET otp = '$otp' WHERE email = '$email_address'");
+            // }
 
             if (!count($errors)) {
                 $cols = ['fullname', 'email', 'username', 'password'];

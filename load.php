@@ -33,8 +33,8 @@ $conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
 
 $ObjAuth = new auth();
 $ObjAuth->signup($conn, $ObjGlob);
-
-
+$ObjDisplay = new display();
+$ObjDisplay ->displayUsers($conn);
 
 
 ?>

@@ -1,4 +1,16 @@
 <?php
+require "load.php";
+$ObjLayouts->heading();
+$ObjMenus->main_menu();
+
+$ObjDisplay ->displayUsers($conn);
+$ObjLayouts->footer();
+
+
+?>
+
+
+<?php
 
 class user_details{
     var $fname;
@@ -27,4 +39,3 @@ class user_details{
 
 
 
-// https://github.com/mundabenj/api_d.git

@@ -87,6 +87,9 @@ class menus{
                   <li class="nav-item">
                     <a class="nav-link" href="signup.php">Sign Up</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="user_details.php">User Details</a>
+                  </li>
                 </ul>
                 <form role="search">
                   <input class="form-control" type="search" placeholder="Search" aria-label="Search">
