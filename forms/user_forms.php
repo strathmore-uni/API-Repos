@@ -15,7 +15,7 @@ class user_forms{
                     <label for="fullname" class="form-label">Fullname:</label>
                     
                     
-<input type="text" name="fullname" class="form-control form-control-lg" maxlength="50" id="fullname" placeholder="Enter your name" <?php print (isset($_SESSION["fullname"])) ? 'value="'.$_SESSION["fullname"].'"'  : ''; unset($_SESSION["fullname"]); ?> >
+             <input type="text" name="fullname" class="form-control form-control-lg" maxlength="50" id="fullname" placeholder="Enter your name" <?php print (isset($_SESSION["fullname"])) ? 'value="'.$_SESSION["fullname"].'"'  : ''; unset($_SESSION["fullname"]); ?> >
                     
                     
                     
@@ -37,11 +37,28 @@ class user_forms{
 
 
 
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" name="password" class="form-control form-control-lg" maxlength="50" id="password" placeholder="Enter your password" <?php print (isset($_SESSION["password"])) ? 'value="'.$_SESSION["password"].'"'  : ''; unset($_SESSION["password"]); ?> >
+                    <?php print (isset($err['password_err'])) ? "<span class='invalid'>" . $err['password_err'] . "</span>" : '' ; ?>
+                </div>
+                <div class="mb-3">
+                    <label for="repeat_password" class="form-label">Repeat Password:</label>
+                    <input type="password" name="repeat_password" class="form-control form-control-lg" maxlength="50" id="repeat_password" placeholder="Repeat your password" <?php print (isset($_SESSION["repeat_password"])) ? 'value="'.$_SESSION["repeat_password"].'"'  : ''; unset($_SESSION["repeat_password"]); ?> >
+                    <?php print (isset($err['repeat_password_err'])) ? "<span class='invalid'>" . $err['repeat_password_err'] . "</span>" : '' ; ?>
+                </div>
+
+
+
 
 
 
 
                 
+
+
+
+
                 <button type="submit" name="signup" class="btn btn-primary">Submit</button>
               </form>
           </div>

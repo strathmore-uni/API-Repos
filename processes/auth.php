@@ -8,6 +8,9 @@ class auth{
             $fullname = $_SESSION["fullname"] = $conn->escape_values(ucwords(strtolower($_POST["fullname"])));
             $email_address = $_SESSION["email_address"] = $conn->escape_values(strtolower($_POST["email_address"]));
             $username = $_SESSION["username"] = $conn->escape_values(strtolower($_POST["username"]));
+            $password = $_SESSION["password"] = $conn->escape_values($_POST["password"]);
+            $repeat_password = $_SESSION["repeat_password"] = $conn->escape_values($_POST["repeat_password"]);
+
 
 // Implement input validation and error handling
 // =============================================
@@ -52,24 +55,41 @@ if (!ctype_alpha($username)) {
     $ObjGlob->setMsg('errors', $errors, 'invalid');
 }
 
+if ($password !== $repeat_password) {
+    $errors['passwordMismatch_err'] = "Passwords do not match";
+    
+}
+
+// Verify password length
+if (strlen($password) < 8 || strlen($password) > 32) {
+    $errors['passwordLength_err'] = "Password must be between 8 and 32 characters long";
+    
+}
+
+// Verify password strength
+if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,32}$/", $password)) {
+    $errors['passwordStrength_err'] = "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character";
+    
+}
+
 // Implement 2FA (email => PHP-Mailer)
 // ===================================
 // Send email verification with an OTP (OTC)
 // Verify that the password is identical to the repeat passsword
 // verify that the password length is between 4 and 8 characters
-if(!count($errors)){
-            $cols = ['fullname', 'email', 'username'];
-            $vals = [$fullname, $email_address, $username];
-            $data = array_combine($cols, $vals);
-            $insert = $conn->insert('users', $data);
-            if($insert === TRUE){
-                header('Location: signup.php');
-                unset($_SESSION["fullname"], $_SESSION["email_address"], $_SESSION["username"]);
-                exit();
-            }else{
-                die($insert);
-            }
-        }else{
+if (!count($errors)) {
+    $cols = ['fullname', 'email', 'username', 'password'];
+    $vals = [$fullname, $email_address, $username, password_hash($password, PASSWORD_DEFAULT)];
+    $data = array_combine($cols, $vals);
+    $insert = $conn->insert('users', $data);
+    if ($insert === TRUE) {
+        header('Location: signup.php');
+        unset($_SESSION["fullname"], $_SESSION["email_address"], $_SESSION["username"], $_SESSION["password"], $_SESSION["repeat_password"]);
+        exit();
+    } else {
+        die($insert);
+    }
+}else{
             $ObjGlob->setMsg('msg', 'Error(s)', 'invalid');
             $ObjGlob->setMsg('errors', $errors, 'invalid');
         }
