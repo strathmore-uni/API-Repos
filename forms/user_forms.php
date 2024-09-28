@@ -50,15 +50,6 @@ class user_forms{
 
 
 
-
-
-
-
-                
-
-
-
-
                 <button type="submit" name="signup" class="btn btn-primary">Submit</button>
               </form>
           </div>
