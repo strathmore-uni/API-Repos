@@ -8,13 +8,32 @@
     <script>
         document.write('Hello');
     </script>
+<!---possibility --1-->
+
+
     <br>
     <p id="ics"></p>
 
-
-
     <script>
         document.getElementById('ics').innerHTML = 'This is my first JS';
+        document.getElementById('ics').style.fontSize='18px';
+        document.getElementById('ics').style.display = 'block';
     </script>
+<button onclick="document.getElementById('MyImg'). src='images/bulb1_on.jpg'">Turn On</button>
+ <button onclick="document.getElementById('MyImg'). src='images/bulb_off.jpg'">Turn Off</button> 
+
+ <img src="images/bulb1_on.jpg" id="MyImg" width="350px">
+<!--possibility 3-->
+<script>
+    window.alert('Connection Failed');
+</script>
+<!--Possibility 4-->
+<a href="#" onclick="return confirm('Are you sure?')">Delete</a>
+<!--Possibility 5-->
+<script>
+    console.log(45/15);
+</script>
+
+
 </body>
 </html>
