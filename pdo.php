@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
-$username = "root";
+$username = "roocd";
 $password = "";
 $dbname="api_d";
 

@@ -6,7 +6,7 @@ public function displayUsers($conn) {
     $sql = "SELECT userId, fullname, username, email FROM users ORDER BY userId ASC";
     $result = $conn->select_while($sql);
  ?>  
-        <h3>A list of users details</h3>";
+        <h3>A list of users details</h3>
         
 <ol>
 
