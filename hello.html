@@ -19,10 +19,10 @@
         document.getElementById('ics').style.fontSize='18px';
         document.getElementById('ics').style.display = 'block';
     </script>
-<button onclick="document.getElementById('MyImg'). src='images/bulb1_on.jpg'">Turn On</button>
- <button onclick="document.getElementById('MyImg'). src='images/bulb_off.jpg'">Turn Off</button> 
+<button onclick="document.getElementById('MyImg'). src='images/bulb1_on.jpeg'">Turn On</button>
+ <button onclick="document.getElementById('MyImg'). src='images/bulb_off.jpeg'">Turn Off</button> 
 
- <img src="images/bulb1_on.jpg" id="MyImg" width="350px">
+ <img src="images/bulb_on.jpg" id="MyImg" width="350px">
 <!--possibility 3-->
 <script>
     window.alert('Connection Failed');
@@ -34,6 +34,29 @@
     console.log(45/15);
 </script>
 
+
+<script>
+    function MyScript(){
+        document.getElementById('ics_D').innerHTML = 'This is my second js line';
+    }
+</script>
+<br>
+<span id="ics_D" onclick="MyScript(5,9);">Next</span>
+<br>
+
+<script>
+    var age = 18;
+    let lastname = 'Okama';
+    const db_name = 'ics_d';
+
+    document.write('I am '+ age + 'years old' + 'and my last name is'+ lastname +' , ');
+
+    if(age > 18){
+        document.write('I am an adult');
+    }else{
+        document.write('I am not an adult');
+    }
+</script>
 
 </body>
 </html>
