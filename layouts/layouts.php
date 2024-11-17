@@ -1,5 +1,5 @@
 <?php
-class layout{
+class layouts{
     public function heading(){
         ?>
 <!DOCTYPE html>
