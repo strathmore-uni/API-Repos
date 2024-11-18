@@ -58,51 +58,71 @@ if (!ctype_alpha($username)) {
     $errors['usernameLetters_err'] = "Invalid username format. Username must contain letters only";
 }
 
-if(!count($errors)){
+if (!count($errors)) {
+    // Implement 2FA (email => PHP-Mailer)
+    // ===================================
+    
+    // Prepare data for insertion
+    $cols = ['fullname', 'email', 'username', 'ver_code', 'ver_code_time'];
+    $vals = [$fullname, $email_address, $username, $conf['verification_code'], $conf['ver_code_time']];
+    $data = array_combine($cols, $vals);
 
-// Implement 2FA (email => PHP-Mailer)
-// ===================================
-// Send email verification with an OTP (OTC)
+    // Insert user data into the database
+    if ($conn->insert('users', $data)) {
+        // Prepare email replacements
+        $replacements = [
+            'fullname' => $fullname,
+            'email_address' => $email_address,
+            'verification_code' => $conf['verification_code'],
+            'site_full_name' => strtoupper($conf['site_initials'])
+        ];
 
-            $cols = ['fullname', 'email', 'username', 'ver_code', 'ver_code_time'];
-            $vals = [$fullname, $email_address, $username, $conf['verification_code'], $conf['ver_code_time']];
-            $data = array_combine($cols, $vals);
-            $insert = $conn->insert('users', $data);
-            if($insert === TRUE){
+        // Send verification email
+        $emailSent = $ObjSendMail->SendMail([
+            'to_name' => $fullname,
+            'to_email' => $email_address,
+            'subject' => $this->bind_to_template($replacements, $lang["AccountVerification"]),
+            'message' => $this->bind_to_template($replacements, $lang["AccRegVer_template"])
+        ]);
 
-                $replacements = array('fullname' => $fullname, 'email_address' =>
-                $email_address, 'verification_code' => $conf['verification_code'], 'site_full_name' => strtoupper($conf['site_initials']));
+        if ($emailSent) {
+            // Redirect to verification page
+            header('Location: verify_code.php');
+            unset($_SESSION["fullname"], $_SESSION["username"]);
+            exit();
+        } 
+    
+} else {
+    // Handle validation errors
+    $ObjGlob->setMsg('msg', 'Error(s)', 'invalid');
+    $ObjGlob->setMsg('errors', $errors, 'invalid');
+}}}}
+
+// Verification Code Logic
+ public function verify_code($conn, $ObjGlob, $lang) {
+    if (isset($_POST["verify_code"])) {
+        $errors = [];
+        $ver_code = $_SESSION["ver_code"] = $conn->escape_values($_POST["ver_code"]);
+
+        // Validate the verification code
+        if (!is_numeric($ver_code)) {
+            $errors['not_numeric'] = "Invalid code format. Verification Code must contain numbers only.";
+        }
+
+        // Further verification logic can be added here...
+        // For example, check if the code matches the one stored in the session
+        // and if it hasn't expired.
         
-                $ObjSendMail->SendMail([
-                    'to_name' => $fullname,
-                    'to_email' => $email_address,
-                    'subject' => $this->bind_to_template($replacements, $lang["AccountVerification"]),
-                    'message' => $this->bind_to_template($replacements, $lang["AccRegVer_template"])
-                ]);
-                
-                header('Location: verify_code.php');
-                unset($_SESSION["fullname"], $_SESSION["username"]);
-                exit();
-            }else{
-                die($insert);
-            }
-        }else{
+        if (empty($errors)) {
+            // Code is valid, proceed with the next steps
+            // ...
+        } else {
+            // Handle validation errors
             $ObjGlob->setMsg('msg', 'Error(s)', 'invalid');
             $ObjGlob->setMsg('errors', $errors, 'invalid');
         }
-    }
-    }
+    
 
-    public function verify_code($conn, $ObjGlob, $ObjSendMail, $lang, $conf){
-        if(isset($_POST["verify_code"])){
-            $errors = array();
-
-            $ver_code = $_SESSION["ver_code"] = $conn->escape_values($_POST["ver_code"]);
-
-            // Verifying the code is a numeric value
-            if(!is_numeric($ver_code)){
-                $errors['not_numeric'] = "Invalid code format. Verification Code must contain numbers only";
-            }
             
             // Verifying the code has 6 characters
             if(strlen($ver_code) > 6 || strlen($ver_code) < 6){
@@ -127,10 +147,10 @@ if(!count($errors)){
             $ObjGlob->setMsg('msg', 'Error(s)', 'invalid');
             $ObjGlob->setMsg('errors', $errors, 'invalid');
         }
-        }  
-    }
+        }  }
+    
 
-    public function set_passphrase($conn, $ObjGlob, $ObjSendMail, $lang, $conf){
+public  function set_passphrase($conn, $ObjGlob, $ObjSendMail, $lang, $conf){
         if(isset($_POST["set_pass"])){
 
             $errors = array();
@@ -219,7 +239,7 @@ if(!count($errors)){
             exit();
         }
     }
-    public function save_details($conn, $ObjGlob, $ObjSendMail, $lang, $conf){
+ public function save_details($conn, $ObjGlob, $ObjSendMail, $lang, $conf){
         if(isset($_POST["save_details"])){
             $errors = array();
             $genderId = $_SESSION["genderId"] = $conn->escape_values($_POST["genderId"]);
@@ -248,7 +268,7 @@ if(!count($errors)){
 
         }
     }
-    public function update_profile($conn, $ObjGlob, $ObjSendMail, $lang, $conf){
+  public function update_profile($conn, $ObjGlob, $ObjSendMail, $lang, $conf){
         if(isset($_POST["update_profile"])){
             $errors = array();
 
@@ -262,4 +282,4 @@ if(!count($errors)){
             $genderId = $_SESSION["genderId"] = $conn->escape_values($_POST["genderId"]);
         }
     }
-}
+    }
